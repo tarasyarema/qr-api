@@ -7,6 +7,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/rs/cors"
 	qrcode "github.com/skip2/go-qrcode"
 )
 
@@ -53,7 +54,17 @@ func encode(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/encode", encode)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/encode", encode)
+
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedHeaders:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "OPTIONS", "PUT", "PATCH"},
+		AllowCredentials: true,
+	})
+
+	handler := c.Handler(mux)
 
 	port := os.Getenv("PORT")
 
@@ -64,7 +75,7 @@ func main() {
 	addr := fmt.Sprintf(":%s", port)
 	log.Printf("listening on addr %s", addr)
 
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	if err := http.ListenAndServe(":8080", handler); err != nil {
 		panic(err)
 	}
 }
