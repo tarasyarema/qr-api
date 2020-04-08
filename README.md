@@ -4,7 +4,7 @@ Generate QR Codes via API.
 
 ## Usage
 
-> Use it via this url []().
+> Use it via this base url [https://pg-qr-api.herokuapp.com](https://pg-qr-api.herokuapp.com).
 
 ### `GET /encode`
 
