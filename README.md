@@ -1,5 +1,7 @@
 # QR API
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/tarasyarema/qr-api)](https://goreportcard.com/report/github.com/tarasyarema/qr-api)
+
 Generate QR Codes via API.
 
 ## Usage
